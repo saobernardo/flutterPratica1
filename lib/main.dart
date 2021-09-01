@@ -5,6 +5,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
+  final contatos = [
+    'Lucas',
+    'Leo',
+    'Arthur',
+    'BH',
+    'Christian'
+  ];
+
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -12,38 +21,18 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Meu primeiro App'),
         ),
-        body: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            ItemLista(largura: 150, color: Colors.pink, altura: 150),
-            ItemLista(largura: 200, color: Colors.green, altura: 150),
-            ItemLista(largura: 150, color: Colors.blue, altura: 150),
-            ItemLista(largura: 200, color: Colors.yellow, altura: 150),
-            ItemLista(largura: 150, color: Colors.purple, altura: 150)
-          ],
+        body: ListView.builder(
+          itemCount: contatos.length,
+          itemBuilder: (ctx, index){
+            return ListTile(
+              leading: Icon(Icons.person),
+              title: Text('${contatos[index]}'),
+              trailing: TextButton(onPressed: (){print('Ligar p/ ${contatos[index]}');}, child: Icon(Icons.phone)),
+            );
+          },
         )
       )
     );
   } 
 }
 
-class ItemLista extends StatelessWidget{
-  ItemLista({
-    required this.largura,
-    required this.color,
-    this.altura = 0
-  });
-
-  final double largura;
-  final Color color;
-  final double altura;
-
-  @override 
-  Widget build(BuildContext context){
-    return Container(
-      width: largura,
-      color: color,
-      height: altura
-    );
-  }
-}

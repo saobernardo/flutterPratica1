@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'src/homeTabBar.dart';
+import 'package:flutter2/src/help.dart';
+import 'src/home.dart';
+import 'src/help.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      home: HomeTabBar()
+      routes: {
+        '/home': (context) => HomePage(),
+        '/help': (context) => HelpPage()
+      },
+      initialRoute: '/home',
     );
   }
-}
 
+
+}

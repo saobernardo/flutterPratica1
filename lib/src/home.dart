@@ -1,21 +1,46 @@
 import 'package:flutter/material.dart';
-import './help.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+import 'models/contador.dart';
+import 'models/nome.dart';
+
+class HomePage extends StatelessWidget{
+  
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: Text('Home Page')
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Ir para a tela help'),
-          onPressed: (){
-            Navigator.pushNamed(context, '/help', arguments: ScreenArguments('Tela de Ajuda', 'Aqui estaria o conteúdo de uma página de ajuda'));
-          },
+      body: Container(
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(labelText: 'Digite seu nome'),
+              onChanged: (text){
+                Provider.of<NomeDado>(context, listen: false).mudarNome(text);
+              },
+            ),
+
+            Text('Contagem:'),
+            Consumer<NomeDado>(
+              builder: (context, nomedado, child) => Text('Meu nome é: ${nomedado.nome}')
+            ),
+            ElevatedButton(child: 
+              Text('Aumentar'), 
+              onPressed: (){ 
+                Provider.of<Contador>(context, listen: false).aumentar();
+              },
+            ),
+            ElevatedButton(child: 
+              Text('Ir para Help'), 
+              onPressed: (){ 
+                Navigator.pushNamed(context, '/help');
+              },
+            ),
+          ],
         ),
-      )
+      ),
     );
   }
 }

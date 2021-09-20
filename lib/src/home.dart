@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models/contador.dart';
 import 'models/nome.dart';
+import './formulario.dart';
 
 class HomePage extends StatelessWidget{
   
@@ -12,31 +12,19 @@ class HomePage extends StatelessWidget{
       appBar: AppBar(
         title: Text('Home Page')
       ),
-      body: Container(
+      body: Center(
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Digite seu nome'),
-              onChanged: (text){
-                Provider.of<NomeDado>(context, listen: false).mudarNome(text);
-              },
+            Container(
+              height: 200,
+              child: Text('Bem-vindo ao app', style: TextStyle(fontSize: 30)),
             ),
 
-            Text('Contagem:'),
-            Consumer<NomeDado>(
-              builder: (context, nomedado, child) => Text('Meu nome é: ${nomedado.nome}')
-            ),
-            ElevatedButton(child: 
-              Text('Aumentar'), 
-              onPressed: (){ 
-                Provider.of<Contador>(context, listen: false).aumentar();
-              },
-            ),
-            ElevatedButton(child: 
-              Text('Ir para Help'), 
-              onPressed: (){ 
-                Navigator.pushNamed(context, '/help');
-              },
+            ElevatedButton(
+              child: Text('Fazer Login'),
+              onPressed: () {
+                 Navigator.pushNamed(context, '/login');
+              }
             ),
           ],
         ),

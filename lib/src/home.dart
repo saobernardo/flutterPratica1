@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+
+import '../stores/contador.dart';
+
+final contador = Contador();
 
 class HomePage extends StatelessWidget{
   
@@ -8,17 +14,22 @@ class HomePage extends StatelessWidget{
       appBar: AppBar(
         title: Text('Home Page')
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 200,
-              child: Text('Bem-vindo ao app', style: TextStyle(fontSize: 30)),
-            ),
-          ],
+      body: Observer(
+        builder: (_) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Contagem: '),
+              Text('${contador.valor}'),
+              ElevatedButton(
+                child: Text('Aumentar Contagem'),
+                onPressed: contador.aumentar,
+              )
+            ],
+            
+          ),
         ),
-      ),
+      )
     );
   }
 }

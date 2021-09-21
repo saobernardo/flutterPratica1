@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'models/nome.dart';
-import './formulario.dart';
 
 class HomePage extends StatelessWidget{
   
@@ -14,17 +10,11 @@ class HomePage extends StatelessWidget{
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 200,
               child: Text('Bem-vindo ao app', style: TextStyle(fontSize: 30)),
-            ),
-
-            ElevatedButton(
-              child: Text('Fazer Login'),
-              onPressed: () {
-                 Navigator.pushNamed(context, '/login');
-              }
             ),
           ],
         ),

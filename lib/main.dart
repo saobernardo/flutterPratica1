@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'src/home.dart';
-import 'src/help.dart';
 import 'src/models/contador.dart';
 import 'src/models/nome.dart';
-import 'src/login.dart';
 
 void main() => runApp(
   MultiProvider(
@@ -24,8 +22,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/home': (context) => HomePage(),
-        '/help': (context) => HelpPage(),
-        '/login': (context) => LoginPage(),
       },
       initialRoute: '/home',
     );

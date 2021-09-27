@@ -1,12 +1,12 @@
 part of '../main.dart';
 
-class HomePage extends StatelessWidget{
+class SobrePage extends StatelessWidget{
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page')
+        title: Text('Sobre Page')
       ),
       body: Observer(
         builder: (_) => Center(
@@ -18,12 +18,6 @@ class HomePage extends StatelessWidget{
               ElevatedButton(
                 child: Text('Aumentar Contagem'),
                 onPressed: contador.aumentar,
-              ),
-              ElevatedButton(
-                child: Text('Tela sobre'),
-                onPressed: (){
-                  Navigator.pushNamed(context, '/sobre');
-                },
               )
             ],
             

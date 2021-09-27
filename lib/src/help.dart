@@ -13,7 +13,7 @@ class HelpPage extends StatelessWidget{
         title: Text('Título de Help'),
       ),
       body: Center(
-        child: Consumer<Contador>(
+        child: Consumer<ContadorNotifier>(
           builder: (context, contador, child) => Text('Contagem: ${contador.valor}')
         )
       ),

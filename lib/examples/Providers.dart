@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget{
             ElevatedButton(child: 
               Text('Aumentar'), 
               onPressed: (){ 
-                Provider.of<Contador>(context, listen: false).aumentar();
+                Provider.of<ContadorNotifier>(context, listen: false).aumentar();
               },
             ),
             ElevatedButton(child: 

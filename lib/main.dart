@@ -4,9 +4,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
 import 'stores/contador.dart';
+import 'src/home.dart';
 //import 'src/models/contador.dart';
 
-part 'src/home.dart';
+//part 'src/home.dart';
 part 'src/sobre.dart';
 
 final contador = Contador();

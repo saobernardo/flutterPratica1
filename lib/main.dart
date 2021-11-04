@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 
 import 'stores/contador.dart';
 import 'src/home.dart';
+import 'src/teste.dart';
 //import 'src/models/contador.dart';
 
 //part 'src/home.dart';
@@ -13,26 +14,25 @@ part 'src/sobre.dart';
 final contador = Contador();
 
 void main() => runApp(MyApp()
-  /*MultiProvider(
+    /*MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => Contador()),
       ChangeNotifierProvider(create: (context) => NomeDado()),
     ],
     child: MyApp(),
   )*/
-);
+    );
 
 class MyApp extends StatelessWidget {
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
         '/home': (context) => HomePage(),
-        '/sobre': (context) => SobrePage()
+        '/sobre': (context) => SobrePage(),
+        '/teste': (context) => TestePage(),
       },
       initialRoute: '/home',
     );
   }
-
 }

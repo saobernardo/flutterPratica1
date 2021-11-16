@@ -1,38 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class Post {
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
+void enviaPost(String titulo, String corpo) async {
+  final response = await http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+      body: {'title': titulo, 'body': corpo, 'userId': '6'});
 
-  Post(
-      {required this.userId,
-      required this.id,
-      required this.title,
-      required this.body});
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-      body: json['body'],
-    );
-  }
-}
-
-Future<Post> pegarPost() async {
-  final response =
-      await http.get(Uri.parse('http://jsonplaceholder.typicode.com/posts/1'));
-
-  if (response.statusCode == 200) {
-    return Post.fromJson(json.decode(response.body));
+  if (response.statusCode == 201) {
+    print(response.body);
   } else {
-    throw Exception('Faiî na requisição de post');
+    throw Exception("Falhou na requisição");
   }
 }
 
@@ -42,34 +20,63 @@ class TestePage extends StatefulWidget {
 }
 
 class _TestePage extends State<TestePage> {
-  late Future<Post> postagem;
+  late final String titulo;
+  late final String corpo;
 
-  @override
-  void initState() {
-    super.initState();
-
-    postagem = pegarPost();
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Página de teste'),
-        ),
-        body: Center(
-          child: FutureBuilder<Post>(
-            future: postagem,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.title);
-              } else if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
+      appBar: AppBar(
+        title: Text('Página de Teste'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Digite o Título'),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Digite um Título';
+                  }
+                  return null;
+                },
+                onSaved: (t) {
+                  setState(() {
+                    titulo = t!;
+                  });
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Digite o Corpo'),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Digite um Corpo';
+                  }
+                  return null;
+                },
+                onSaved: (c) {
+                  setState(() {
+                    corpo = c!;
+                  });
+                },
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      enviaPost(titulo, corpo);
+                    }
+                  },
+                  child: Text('Enviar'))
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
